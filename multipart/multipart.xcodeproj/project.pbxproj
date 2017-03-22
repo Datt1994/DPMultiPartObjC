@@ -434,7 +434,7 @@
 				DEVELOPMENT_TEAM = 3Y587YMRM5;
 				INFOPLIST_FILE = multipart/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zaptechsolutions.multipart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Datt.multipart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fb7cdbf8-abff-4069-aca2-cafde3dc637f";
 				PROVISIONING_PROFILE_SPECIFIER = 30Sep_ZapDev;
@@ -448,7 +448,7 @@
 				DEVELOPMENT_TEAM = 3Y587YMRM5;
 				INFOPLIST_FILE = multipart/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zaptechsolutions.multipart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Datt.multipart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fb7cdbf8-abff-4069-aca2-cafde3dc637f";
 				PROVISIONING_PROFILE_SPECIFIER = 30Sep_ZapDev;
@@ -461,7 +461,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = multipartTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zaptechsolutions.multipartTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Datt.multipartTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/multipart.app/multipart";
 			};
@@ -473,7 +473,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = multipartTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zaptechsolutions.multipartTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Datt.multipartTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/multipart.app/multipart";
 			};
@@ -484,7 +484,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = multipartUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zaptechsolutions.multipartUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Datt.multipartUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = multipart;
 			};
@@ -495,7 +495,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = multipartUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zaptechsolutions.multipartUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Datt.multipartUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = multipart;
 			};
