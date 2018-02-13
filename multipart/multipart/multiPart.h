@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+static NSString *multiPartFieldName = @"fieldName";
+static NSString *multiPartPathURL = @"pathURL";
 @interface multiPart : NSObject
-typedef void(^multiPart_completion_block)(NSDictionary *user,NSString *, NSError *);
+typedef void(^multiPart_completion_block)(NSDictionary *user, NSString *strErr, NSError *error);
 @property (nonatomic, strong) NSURLSession *session;
 +(multiPart *)sharedInstance;
--(void)callPostWebService:(NSString *)url_String parameetrs:(NSMutableDictionary *)parameetrs imgVideoFilePathArr:(NSArray *)arrImgVideo parameetrNameOfPathArr:(NSString *)fieldName completion:(multiPart_completion_block)completion;
+-(void)callPostWebService:(NSString *)url_String parameetrs:(NSMutableDictionary *)parameetrs filePathArr:(NSArray *)arrFilePath completion:(multiPart_completion_block)completion;
 @end

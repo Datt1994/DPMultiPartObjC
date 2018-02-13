@@ -17,18 +17,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjects:@[@"1",@"3"] forKeys:@[@"a_id", @"b_id"]];
+    NSDictionary *dicParameetrs = @{
+                                    @"a_id" : @"1",
+                                    @"b_id" : @"3"
+                                    };
+    NSArray *arrFiles = @[
+                          @{ multiPartFieldName:@"images[]"/*(if only 1 file upload don't use [])*/ ,
+                             multiPartPathURL: @[@"file://xyz/....jpg" ,
+                                                 @"file://xyz/....png"] },
+                          @{ multiPartFieldName:@"video" ,
+                             multiPartPathURL:@[@"file://xyz/....mp4"] },
+                          @{ multiPartFieldName : @"pdf[]" ,
+                             multiPartPathURL : @[@"file://xyz/....pdf" ,
+                                                  @"file://xyz/....pdf"] }
+                          ];
     
     [[multiPart sharedInstance] callPostWebService:@"www.xyz.com/../.."
-        parameetrs:[[NSMutableDictionary alloc] initWithDictionary:dic]
-        imgVideoFilePathArr:@[@"file://xyz/....",@"file://xyz/...."]
-        parameetrNameOfPathArr:@"images[](if only 1 file upload don't use [])"
-        completion:^(NSDictionary *user, NSString *str, NSError *error)
-     {
-         if (!error) {
-             NSLog(@"%@", user);
-         }
-     }];
+                                        parameetrs:[[NSMutableDictionary alloc] initWithDictionary:dicParameetrs]
+                                       filePathArr:arrFiles
+                                        completion:^(NSDictionary *user, NSString *strErr, NSError *error) {
+                                            if (!error) {
+                                                NSLog(@"%@", user);
+                                            }
+                                        }];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

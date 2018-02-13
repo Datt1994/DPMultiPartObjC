@@ -23,7 +23,7 @@ static multiPart *objMultiPart = nil;
     return self;
 }
 
--(void)callPostWebService:(NSString *)url_String parameetrs:(NSMutableDictionary *)parameetrs imgVideoFilePathArr:(NSArray *)arrImgVideo parameetrNameOfPathArr:(NSString *)fieldName completion:(multiPart_completion_block)completion
+-(void)callPostWebService:(NSString *)url_String parameetrs:(NSMutableDictionary *)parameetrs filePathArr:(NSArray *)arrFilePath completion:(multiPart_completion_block)completion
 {
     @try {
         NSString *boundary = [self generateBoundaryString];
@@ -37,26 +37,31 @@ static multiPart *objMultiPart = nil;
         [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
         
         // create body
-        NSData *httpBody = [self createBodyWithBoundary:boundary parameters:parameetrs paths:arrImgVideo fieldName:fieldName];
+        NSData *httpBody = [self createBodyWithBoundary:boundary parameters:parameetrs paths:arrFilePath];
         self.session = [NSURLSession sharedSession];
         // use sharedSession or create your own
         
         NSURLSessionTask *task = [self.session uploadTaskWithRequest:request fromData:httpBody completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error) {
                 NSLog(@"error = %@", error);
-                completion(nil,@"error",error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(nil,@"error",error);
+                });
                 return;
             }
             NSDictionary *user = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            if(completion)
-            {
-                completion(user,@"Success",nil);
-                
-            }
-            else
-            {
-                completion(nil,@"error",error);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(completion)
+                {
+                    completion(user,@"Success",nil);
+                    
+                }
+                else
+                {
+                    completion(nil,@"error",error);
+                }
+            });
+            
             // NSLog(@"result = %@", result);
         }];
         [task resume];
@@ -72,7 +77,6 @@ static multiPart *objMultiPart = nil;
 - (NSData *)createBodyWithBoundary:(NSString *)boundary
                         parameters:(NSDictionary *)parameters
                              paths:(NSArray *)paths
-                         fieldName:(NSString *)fieldName
 {
     NSMutableData *httpBody = [NSMutableData data];
     
@@ -86,16 +90,18 @@ static multiPart *objMultiPart = nil;
     
     // add image data
     
-    for (NSString *path in paths) {
-        NSString *filename  = [path lastPathComponent];
-        NSData   *data      = [NSData dataWithContentsOfFile:path];
-        NSString *mimetype  = [self mimeTypeForPath:path];
-        
-        [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fieldName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
-        [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
-        [httpBody appendData:data];
-        [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    for (NSDictionary *pathDic in paths) {
+        for (NSString *path in pathDic[multiPartPathURL]) {
+            NSString *filename  = [path lastPathComponent];
+            NSData   *data      = [NSData dataWithContentsOfFile:path];
+            NSString *mimetype  = [self mimeTypeForPath:path];
+            
+            [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", pathDic[multiPartFieldName], filename] dataUsingEncoding:NSUTF8StringEncoding]];
+            [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
+            [httpBody appendData:data];
+            [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        }
     }
     
     [httpBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -143,3 +149,4 @@ static multiPart *objMultiPart = nil;
 }
 
 @end
+
