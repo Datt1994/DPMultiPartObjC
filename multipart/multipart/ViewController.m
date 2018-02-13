@@ -17,18 +17,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSString *imgPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"jpeg"];
     NSDictionary *dicParameetrs = @{
                                     @"a_id" : @"1",
                                     @"b_id" : @"3"
                                     };
     NSArray *arrFiles = @[
                           @{ multiPartFieldName:@"images[]"/*(if only 1 file upload don't use [])*/ ,
-                             multiPartPathURL: @[@"file://xyz/....jpg" ,
+                             multiPartPathURLs: @[imgPath ,
+                                                  imgPath ,
                                                  @"file://xyz/....png"] },
                           @{ multiPartFieldName:@"video" ,
-                             multiPartPathURL:@[@"file://xyz/....mp4"] },
+                             multiPartPathURLs:@[@"file://xyz/....mp4"] },
                           @{ multiPartFieldName : @"pdf[]" ,
-                             multiPartPathURL : @[@"file://xyz/....pdf" ,
+                             multiPartPathURLs : @[@"file://xyz/....pdf" ,
                                                   @"file://xyz/....pdf"] }
                           ];
     

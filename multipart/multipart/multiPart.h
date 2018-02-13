@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 static NSString *multiPartFieldName = @"fieldName";
-static NSString *multiPartPathURL = @"pathURL";
+static NSString *multiPartPathURLs = @"pathURL";
 @interface multiPart : NSObject
 typedef void(^multiPart_completion_block)(NSDictionary *user, NSString *strErr, NSError *error);
 @property (nonatomic, strong) NSURLSession *session;

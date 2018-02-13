@@ -60,8 +60,7 @@ static multiPart *objMultiPart = nil;
                 {
                     completion(nil,@"error",error);
                 }
-            });
-            
+            });   
             // NSLog(@"result = %@", result);
         }];
         [task resume];
@@ -91,7 +90,7 @@ static multiPart *objMultiPart = nil;
     // add image data
     
     for (NSDictionary *pathDic in paths) {
-        for (NSString *path in pathDic[multiPartPathURL]) {
+        for (NSString *path in pathDic[multiPartPathURLs]) {
             NSString *filename  = [path lastPathComponent];
             NSData   *data      = [NSData dataWithContentsOfFile:path];
             NSString *mimetype  = [self mimeTypeForPath:path];
