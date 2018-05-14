@@ -1,10 +1,12 @@
-# multiPart
+## multiPart
 Upload videos , images and other files(pdf, doc,..) using multiPart class objective C 
 
-Step 1:-  Copy & paste multiPart.h & multiPart.m files into your project 
+**For Swift** :- [MultiPartSwift](https://github.com/Datt1994/MultiPartSwift)
 
-Step 2:-  Usage 
+**Step 1**:-  Copy & paste `multiPart.h` & `multiPart.m` files into your project 
 
+**Step 2**:-  Usage 
+```objc
     #import "multiPart.h"
 
     NSString *imgPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"jpeg"];
@@ -32,3 +34,4 @@ Step 2:-  Usage
                                                 NSLog(@"%@", user);
                                             }
                                         }];
+```
